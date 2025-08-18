@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@tailwindcss base;
+@tailwindcss components;
+@tailwindcss utilities;
+
+.card {
+  @apply flex flex-col items-center justify-center /*Flex elements*/
+  w-24 h-32 bg-gray-200 /*Size and background*/
+  border border-gray-300 rounded-lg shadow-md/*Borders*/
+  text-5xl font-bold;/*Text style 3rem=5xl*/
+}
+
+.card:hover {
+  @apply bg-gray-300 /*Change background on hover*/
+  transition-all duration-200 ease-in-out/*Smooth transition*/
+  transform scale-105; /*Slightly enlarge on hover*/
+}
+
+.deck {
+  @apply flex flex-nowrap gap-4 justify-around/*Flex properties*/
+  w-5/6 mx-auto p-2;
+}
+
+.btn {
+  @apply px-4 py-2 
+  bg-blue-500 text-white 
+  rounded hover:bg-blue-600
+  transition-colors duration-200;
+}
+
+.btn:hover {
+  @apply bg-blue-600;
+}

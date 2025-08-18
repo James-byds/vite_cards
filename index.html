@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card match</title>
+  <link rel="stylesheet" href="src/css/style.css" type="text/css">
+</head>
+
+<body>
+  <header>
+    <h1>Card Match Game</h1>
+    <p>Match the cards to win!</p>
+  </header>
+  <div id="board" class="w-5/6 mx-auto flex flex-col items-center">
+    <p class="my-5">AI's given card</p>
+    <div id="ai-card" class="deck ">
+      <!-- AI's card will be displayed here -->
+    </div>
+    <p class="my-5">Player's Hand</p>
+    <div id="player-hand" class="deck">
+    </div>
+    <button type="button" class="btn" id="skip">Passer</button>
+    <span id="score">Score: 0</span>
+  </div>
+  <script src="src/main.js" type="module"></script>
+</body>
+
+</html>
