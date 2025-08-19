@@ -26,14 +26,17 @@ const Display = (PlayerDeck, AIDeck) => {
 
 const Card_generator = (deck) => {
   //Generate starting deck with 5 unique cards
+  const colors = ["red","black"];
   while (deck.length < 5) {
-    const colors = ["red","black"];
     let randomColor = colors[Math.floor(Math.random() * colors.length)];
     let card ={"value" : Math.floor(Math.random() * 10) + 1, "color": randomColor};
     let loop = true; //help to control the loop
     //Unique card for the deck
     do {
-      if (!deck.includes(card)) {
+      const exist = deck.some(
+        (genCard) => genCard.value === card.value && genCard.color === card.color
+      );//.some checks if the card already exists in the deck and sends a boolean
+      if (!exist) {
         deck.push(card);
         loop = false;  
         console.log("Card added to deck:", card); // Debugging log
@@ -42,7 +45,8 @@ const Card_generator = (deck) => {
       }
       else {
         console.log("Card already exists in deck, generating a new one.");
-        card = Math.floor(Math.random() * 10) + 1;
+        randomColor = colors[Math.floor(Math.random() * colors.length)];
+        card ={"value" : Math.floor(Math.random() * 10) + 1, "color": randomColor};
       }
     } while (loop==true);
   }

@@ -14,7 +14,7 @@ const addDragListeners = () => {
     console.log("Dragging card:", card.textContent); // Debugging log
     pickedCard = card;
     console.log("Picked card:", pickedCard.textContent); // Debugging log
-    event.target.classList.add("dragging");
+    pickedCard.classList.add("dragging");
     event.dataTransfer.effectAllowed = "move"; // Allow move effect
   });
 });
@@ -44,10 +44,12 @@ dropZone.addEventListener("drop", (event) => {
   event.preventDefault(); // Prevent default behavior
   //getting values
   const cardValue = parseInt(pickedCard.textContent);
+  const cardColor = pickedCard.classList.contains("red") ? "red" : "black";
   const cardFind = aiContainer.querySelector(".card");
   const aiValue = parseInt(cardFind.textContent);
+  const aiColor = cardFind.classList.contains("red") ? "red" : "black";
   //Handle player's card selection
-  if (cardValue === aiValue) {
+  if (cardValue === aiValue && cardColor === aiColor) {
     score.value += 1;
   }
   else {//score -- if the card doesn't match
@@ -60,12 +62,17 @@ dropZone.addEventListener("drop", (event) => {
   dropZone.classList.remove('active');
   
   // AIDeck = AIDeck.filter((card) => card !== cardValue);
- // Instead of filtering, we can use splice to remove the card because AIDeck is read only
-  const indexValue = AIDeck.indexOf(aiValue);
+  //need to use findIndex to get the index of the card
+  const indexValue = AIDeck.findIndex(card => 
+      card.value === aiValue && card.color === aiColor  
+    );
+  // Instead of filtering, we can use splice to remove the card because AIDeck is read only
   AIDeck.splice(indexValue, 1);
   console.log("Player Score:", score.value);
   //doing same for player deck
-  const playerIndex = PlayerDeck.indexOf(cardValue);
+  const playerIndex = PlayerDeck.findIndex(card => 
+    card.value === cardValue && card.color === cardColor
+  );
   PlayerDeck.splice(playerIndex, 1);
   scoreDisplay.textContent = `Score: ${score.value}`;
   
@@ -86,11 +93,12 @@ dropZone.addEventListener("drop", (event) => {
 skipButton.addEventListener("click", () => {
   //Handle skip action
   const cardValue = parseInt(aiContainer.querySelector(".card").textContent);
+  const cardColor = aiContainer.querySelector(".card").classList.contains("red") ? "red" : "black";
  // AIDeck = AIDeck.filter((card) => card !== cardValue);
  // Instead of filtering, we can use splice to remove the card because AIDeck is read only
-  const indexValue = AIDeck.indexOf(cardValue);
+  const indexValue = AIDeck.findIndex(card => card.value === cardValue && card.color === cardColor);
   AIDeck.splice(indexValue, 1);
-  console.log("Skipped card:", cardValue);
+  console.log("Skipped card:", cardValue, cardColor);
   if (AIDeck.length === 0) {
     resetGame(); // Reset the game if AI deck is empty
     return;
