@@ -10,14 +10,16 @@ const Display = (PlayerDeck, AIDeck) => {
     cardElement.className = "card";
     //add draggable attribute to each card
     cardElement.setAttribute("draggable", "true");
-    cardElement.textContent = card; // Display the card number
+    cardElement.textContent = card.value; // Display the card number
+    cardElement.classList.add(card.color); // Add color class
     playerContainer.appendChild(cardElement);
   });
   //AI Display
   const aiCard = AIDeck[Math.floor(Math.random() * AIDeck.length)];
   const aiCardElement = document.createElement("div");
   aiCardElement.className = "card";
-  aiCardElement.textContent = aiCard; // Display the AI card number
+  aiCardElement.textContent = aiCard.value; // Display the AI card number
+  aiCardElement.classList.add(aiCard.color); // Add color class
   aiContainer.appendChild(aiCardElement);
   addDragListeners();
 }
@@ -25,7 +27,9 @@ const Display = (PlayerDeck, AIDeck) => {
 const Card_generator = (deck) => {
   //Generate starting deck with 5 unique cards
   while (deck.length < 5) {
-    let card = Math.floor(Math.random() * 10) + 1;
+    const colors = ["red","black"];
+    let randomColor = colors[Math.floor(Math.random() * colors.length)];
+    let card ={"value" : Math.floor(Math.random() * 10) + 1, "color": randomColor};
     let loop = true; //help to control the loop
     //Unique card for the deck
     do {

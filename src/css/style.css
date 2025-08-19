@@ -5,13 +5,20 @@
 
 .card, .drop {
   @apply flex flex-col items-center justify-center /*Flex elements*/
-  w-24 h-32 bg-gray-200 /*Size and background*/
+  w-24 h-32 /*Size*/
   border border-gray-300 rounded-lg shadow-md/*Borders*/
   text-5xl font-bold;/*Text style 3rem=5xl*/
 }
 
+.black {
+  @apply bg-gray-800 text-white; /*Black card style*/
+}
+.red {
+  @apply bg-red-500 text-white; /*Red card style*/
+}
+
 .card:hover {
-  @apply bg-gray-300 /*Change background on hover*/
+  @apply brightness-200 /*Change background on hover*/
   transition-all duration-200 ease-in-out/*Smooth transition*/
   transform scale-105; /*Slightly enlarge on hover*/
 }
