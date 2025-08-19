@@ -7,8 +7,8 @@ const Init = () => {
   Card_generator(AIDeck);
   Card_generator(PlayerDeck);
   //Init score
-  //score = 0;
-  scoreDisplay.textContent = `Score: ${score}`;
+  score.value = 0;
+  scoreDisplay.textContent = `Score: ${score.value}`;
 
   console.log("AI Deck:", AIDeck);
   console.log("Player Deck:", PlayerDeck);

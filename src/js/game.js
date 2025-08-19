@@ -1,9 +1,10 @@
+import { Card_generator, Display } from "./card_handling.js";
+import { AIDeck, PlayerDeck, score, scoreDisplay, playerContainer, aiContainer, skipButton } from "./variables.js";
+import { Init } from "./init.js";
 
 const resetGame = () => {
-  alert("Game Over! Your final score is: " + score);
+  alert("Game Over! Your final score is: " + score.value);
   // Reset the game
-  AIDeck = [];
-  PlayerDeck = [];
   Init();
 }
 
@@ -14,15 +15,21 @@ playerContainer.addEventListener("click", (event) => {
   const aiValue = parseInt(cardFind.textContent);
   //Handle player's card selection
   if (selectedCard === aiValue) {
-    score += 1;
+    score.value += 1;
   }
   else {//score -- if the card doesn't match
-    score -= 1;
+    score.value -= 1;
     console.log("Card not found in AI's deck.");
   }
-  AIDeck = AIDeck.filter((card) => card !== aiValue);
-  console.log("Player Score:", score);
-  scoreDisplay.textContent = `Score: ${score}`;
+  // AIDeck = AIDeck.filter((card) => card !== cardValue);
+ // Instead of filtering, we can use splice to remove the card because AIDeck is read only
+  const indexValue = AIDeck.indexOf(aiValue);
+  AIDeck.splice(indexValue, 1);
+  console.log("Player Score:", score.value);
+  //doing same for player deck
+  const playerIndex = PlayerDeck.indexOf(selectedCard);
+  PlayerDeck.splice(playerIndex, 1);
+  scoreDisplay.textContent = `Score: ${score.value}`;
   if (AIDeck.length === 0) {
     resetGame(); // Reset the game if AI deck is empty
     return;
@@ -35,7 +42,10 @@ playerContainer.addEventListener("click", (event) => {
 skipButton.addEventListener("click", () => {
   //Handle skip action
   const cardValue = parseInt(aiContainer.querySelector(".card").textContent);
-  AIDeck = AIDeck.filter((card) => card !== cardValue);
+ // AIDeck = AIDeck.filter((card) => card !== cardValue);
+ // Instead of filtering, we can use splice to remove the card because AIDeck is read only
+  const indexValue = AIDeck.indexOf(cardValue);
+  AIDeck.splice(indexValue, 1);
   console.log("Skipped card:", cardValue);
   if (AIDeck.length === 0) {
     resetGame(); // Reset the game if AI deck is empty
