@@ -8,6 +8,7 @@ const Display = (PlayerDeck, AIDeck) => {
   PlayerDeck.forEach((card) => {
     const cardElement = document.createElement("div");
     cardElement.className = "card";
+    cardElement.dataset.value = card.value; // Store card value in dataset
     //add draggable attribute to each card
     cardElement.setAttribute("draggable", "true");
     cardElement.innerHTML = `
@@ -22,6 +23,7 @@ const Display = (PlayerDeck, AIDeck) => {
   const aiCard = AIDeck[Math.floor(Math.random() * AIDeck.length)];
   const aiCardElement = document.createElement("div");
   aiCardElement.className = "card";
+  aiCardElement.dataset.value = aiCard.value; // Store card value in dataset
   aiCardElement.innerHTML = `
     <span class="sign sign-top">${aiCard.sign}</span>
     <span>${aiCard.value} </span>

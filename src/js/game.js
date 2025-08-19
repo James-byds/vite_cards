@@ -43,13 +43,15 @@ dropZone.addEventListener("dragleave", (event) => {//remove active when out
 dropZone.addEventListener("drop", (event) => {
   event.preventDefault(); // Prevent default behavior
   //getting values
-  const cardValue = parseInt(pickedCard.textContent);
+  const cardValue = parseInt(pickedCard.dataset.value);
   const cardColor = pickedCard.classList.contains("red") ? "red" : "black";
+  const CardSign = pickedCard.querySelector(".sign-top").textContent;
   const cardFind = aiContainer.querySelector(".card");
-  const aiValue = parseInt(cardFind.textContent);
+  const aiValue = parseInt(cardFind.dataset.value);
   const aiColor = cardFind.classList.contains("red") ? "red" : "black";
+  const aiSign = cardFind.querySelector(".sign-top").textContent;
   //Handle player's card selection
-  if (cardValue === aiValue && cardColor === aiColor) {
+  if (cardValue === aiValue && cardColor === aiColor && CardSign === aiSign) {
     score.value += 1;
   }
   else {//score -- if the card doesn't match
@@ -64,14 +66,14 @@ dropZone.addEventListener("drop", (event) => {
   // AIDeck = AIDeck.filter((card) => card !== cardValue);
   //need to use findIndex to get the index of the card
   const indexValue = AIDeck.findIndex(card => 
-      card.value === aiValue && card.color === aiColor  
+      card.value === aiValue && card.color === aiColor  && card.sign === aiSign
     );
   // Instead of filtering, we can use splice to remove the card because AIDeck is read only
   AIDeck.splice(indexValue, 1);
   console.log("Player Score:", score.value);
   //doing same for player deck
   const playerIndex = PlayerDeck.findIndex(card => 
-    card.value === cardValue && card.color === cardColor
+    card.value === cardValue && card.color === cardColor && card.sign === CardSign
   );
   PlayerDeck.splice(playerIndex, 1);
   scoreDisplay.textContent = `Score: ${score.value}`;
@@ -92,11 +94,12 @@ dropZone.addEventListener("drop", (event) => {
 
 skipButton.addEventListener("click", () => {
   //Handle skip action
-  const cardValue = parseInt(aiContainer.querySelector(".card").textContent);
+  const cardValue = parseInt(aiContainer.querySelector(".card").dataset.value);
   const cardColor = aiContainer.querySelector(".card").classList.contains("red") ? "red" : "black";
+  const cardSign = aiContainer.querySelector(".card").querySelector(".sign-top").textContent;
  // AIDeck = AIDeck.filter((card) => card !== cardValue);
  // Instead of filtering, we can use splice to remove the card because AIDeck is read only
-  const indexValue = AIDeck.findIndex(card => card.value === cardValue && card.color === cardColor);
+  const indexValue = AIDeck.findIndex(card => card.value === cardValue && card.color === cardColor && card.sign === cardSign);
   AIDeck.splice(indexValue, 1);
   console.log("Skipped card:", cardValue, cardColor);
   if (AIDeck.length === 0) {
