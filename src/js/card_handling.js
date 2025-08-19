@@ -24,10 +24,10 @@ const Display = (PlayerDeck, AIDeck) => {
   addDragListeners();
 }
 
-const Card_generator = (deck) => {
+const Card_generator = (deck, length) => {
   //Generate starting deck with 5 unique cards
   const colors = ["red","black"];
-  while (deck.length < 5) {
+  while (deck.length < length) {
     let randomColor = colors[Math.floor(Math.random() * colors.length)];
     let card ={"value" : Math.floor(Math.random() * 10) + 1, "color": randomColor};
     let loop = true; //help to control the loop

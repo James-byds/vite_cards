@@ -5,8 +5,8 @@ const Init = () => {
   AIDeck.length = 0; // Clear previous AI deck
   PlayerDeck.length = 0; // Clear previous player deck
   //Generating decks
-  Card_generator(AIDeck);
-  Card_generator(PlayerDeck);
+  Card_generator(AIDeck, 20);
+  Card_generator(PlayerDeck, 5);
   //Init score
   score.value = 0;
   scoreDisplay.textContent = `Score: ${score.value}`;

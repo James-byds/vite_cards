@@ -80,7 +80,7 @@ dropZone.addEventListener("drop", (event) => {
   setTimeout(() => {
     pickedCard.remove(); // Remove the card from the player's hand
     pickedCard = null; // Reset picked card
-    if (AIDeck.length === 0) {
+    if (AIDeck.length === 0 || PlayerDeck.length === 0) {
       resetGame(); // Reset the game if AI deck is empty
       return;
     }
