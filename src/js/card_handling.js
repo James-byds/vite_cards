@@ -1,4 +1,5 @@
 import {aiContainer, playerContainer} from "./variables.js";
+import { addDragListeners } from "./game.js";
 const Display = (PlayerDeck, AIDeck) => {
   //Display player's hand and chosen ai card
   aiContainer.innerHTML = ""; // Clear previous AI card
@@ -18,6 +19,7 @@ const Display = (PlayerDeck, AIDeck) => {
   aiCardElement.className = "card";
   aiCardElement.textContent = aiCard; // Display the AI card number
   aiContainer.appendChild(aiCardElement);
+  addDragListeners();
 }
 
 const Card_generator = (deck) => {

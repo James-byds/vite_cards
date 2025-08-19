@@ -10,6 +10,5 @@ const scoreDisplay = board.querySelector("#score");
 const skipButton = board.querySelector("#skip");
 //drag'n'drop elements
 const dropZone = board.querySelector(".drop");
-const draggableCards = playerContainer.querySelectorAll("[draggable]");
 
-export { AIDeck, PlayerDeck, score, board, playerContainer, aiContainer, scoreDisplay, skipButton, dropZone, draggableCards };
+export { AIDeck, PlayerDeck, score, board, playerContainer, aiContainer, scoreDisplay, skipButton, dropZone };
