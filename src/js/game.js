@@ -23,6 +23,12 @@ draggableCards.forEach((card) => {
 dropZone.addEventListener("dragover", (event) => {
   event.preventDefault(); // Prevent default to allow drop
   event.dataTransfer.dropEffect = "move"; // Show move effect
+  event.target.classList.add('active');
+});
+
+dropZone.addEventListener("dragleave", (event) => {//remove active when out
+  event.preventDefault();// Prevent default to allow drop
+  event.target.classList.remove('active');
 });
 
 playerContainer.addEventListener("click", (event) => {

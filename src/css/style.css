@@ -16,6 +16,10 @@
   transform scale-105; /*Slightly enlarge on hover*/
 }
 
+.card.dragging {/*Style for dragged card*/
+  opacity: 0.5; /*Make dragged card semi-transparent*/
+}
+
 .deck {
   @apply flex flex-nowrap gap-4 justify-around/*Flex properties*/
   w-5/6 mx-auto p-2;
@@ -33,9 +37,16 @@
 }
 
 .drop {
-  @apply  border-2 border-dashed /*Border to separate from cards*/
+  @apply  border-2 border-dashed /*Border to separate from regular cards*/
   border-gray-400 rounded-lg 
   w-28 h-36 /*Bit larger than regular card*/
   text-2xl font-semibold
+  transition-all duration-200 ease-in-out/*Smooth transition*/
   my-5 p-6;/*Margin and padding for more spacing*/
+}
+
+.drop.active {
+  @apply bg-gray-100 /*Change background when active*/
+  border-blue-500 /*Highlight border when active*/
+  transform scale-120;/*Slightly enlarge on hover*/
 }
