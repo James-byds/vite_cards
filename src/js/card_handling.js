@@ -7,6 +7,8 @@ const Display = (PlayerDeck, AIDeck) => {
   PlayerDeck.forEach((card) => {
     const cardElement = document.createElement("div");
     cardElement.className = "card";
+    //add draggable attribute to each card
+    cardElement.setAttribute("draggable", "true");
     cardElement.textContent = card; // Display the card number
     playerContainer.appendChild(cardElement);
   });
