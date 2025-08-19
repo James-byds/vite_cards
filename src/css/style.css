@@ -3,6 +3,42 @@
 @tailwindcss components;
 @tailwindcss utilities;
 
+.header {
+  @apply flex items-center justify-between /*Flex properties*/
+  bg-gray-900 text-white /*Background and text color*/
+  p-4 /*Padding*/
+  shadow-lg /*Shadow for depth*/
+  sticky top-0 left-0 w-full z-50; /*Fixed position at the top*/
+}
+
+.title {
+  @apply text-3xl font-bold /*Text style*/
+  flex-1
+  text-yellow-400 /*Title color*/; 
+}
+
+.icons {
+  @apply flex items-center gap-4 /*Flex properties for icons*/
+  text-2xl /*Icon size*/
+  flex-1;
+}
+
+.icon-red {
+  @apply border-2 border-red-500 /*Red icon color*/
+  hover:border-red-700 /*Hover effect*/; 
+}
+
+.icon-black {
+  @apply border-2 border-gray-800/*Black icon border*/
+  hover:border-gray-700 /*Hover effect*/; 
+}
+
+.card-icon {
+  @apply  px-1
+  hover:text-white/*Cursor and hover effect*/
+  transition-colors duration-200 ease-in-out; /*Smooth transition for color change*/
+}
+
 .card, .drop {
   @apply flex flex-col items-center justify-center /*Flex elements*/
   w-24 h-32 /*Size*/
