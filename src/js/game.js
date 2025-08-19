@@ -1,12 +1,29 @@
 import { Card_generator, Display } from "./card_handling.js";
-import { AIDeck, PlayerDeck, score, scoreDisplay, playerContainer, aiContainer, skipButton } from "./variables.js";
+import { AIDeck, PlayerDeck, score, scoreDisplay, playerContainer, aiContainer, skipButton, dropZone, draggableCards } from "./variables.js";
 import { Init } from "./init.js";
+
+//Init Dragged card
+let pickedCard = null;
 
 const resetGame = () => {
   alert("Game Over! Your final score is: " + score.value);
   // Reset the game
   Init();
 }
+//assiging dragged card to active
+draggableCards.forEach((card) => {
+  card.addEventListener("dragstart", (event) => {
+    pickedCard = event.target;
+    event.target.classList.add("dragging");
+    event.dataTransfer.effectAllowed = "move"; // Allow move effect
+  });
+});
+
+//active drop handling
+dropZone.addEventListener("dragover", (event) => {
+  event.preventDefault(); // Prevent default to allow drop
+  event.dataTransfer.dropEffect = "move"; // Show move effect
+});
 
 playerContainer.addEventListener("click", (event) => {
   //getting values
