@@ -63,6 +63,19 @@
   opacity: 0.5; /*Make dragged card semi-transparent*/
 }
 
+/*card sign*/
+.sign {
+  @apply text-2xl /*Sign size*/
+  font-bold /*Bold text*/
+  mx-2; /*adaptive flex*/
+}
+
+.sign-top {
+  align-self: flex-start; /*Align sign to the top*/
+}
+.sign-bot {
+  align-self: flex-end /*adaptive flex*/
+}
 .deck {
   @apply flex flex-nowrap gap-4 justify-around/*Flex properties*/
   w-5/6 mx-auto p-2;

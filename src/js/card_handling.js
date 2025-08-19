@@ -10,7 +10,11 @@ const Display = (PlayerDeck, AIDeck) => {
     cardElement.className = "card";
     //add draggable attribute to each card
     cardElement.setAttribute("draggable", "true");
-    cardElement.textContent = card.value; // Display the card number
+    cardElement.innerHTML = `
+    <span class="sign sign-top">${card.sign}</span>
+    <span>${card.value} </span>
+    <span class="sign sign-bot">${card.sign}</span>
+    `;// Display the card number
     cardElement.classList.add(card.color); // Add color class
     playerContainer.appendChild(cardElement);
   });
@@ -18,7 +22,11 @@ const Display = (PlayerDeck, AIDeck) => {
   const aiCard = AIDeck[Math.floor(Math.random() * AIDeck.length)];
   const aiCardElement = document.createElement("div");
   aiCardElement.className = "card";
-  aiCardElement.textContent = aiCard.value; // Display the AI card number
+  aiCardElement.innerHTML = `
+    <span class="sign sign-top">${aiCard.sign}</span>
+    <span>${aiCard.value} </span>
+    <span class="sign sign-bot">${aiCard.sign}</span>
+    `;
   aiCardElement.classList.add(aiCard.color); // Add color class
   aiContainer.appendChild(aiCardElement);
   addDragListeners();
@@ -26,15 +34,18 @@ const Display = (PlayerDeck, AIDeck) => {
 
 const Card_generator = (deck, length) => {
   //Generate starting deck with 5 unique cards
-  const colors = ["red","black"];
+  let color = "red";
+  const signs = ["♠", "♥", "♦", "♣"];
   while (deck.length < length) {
-    let randomColor = colors[Math.floor(Math.random() * colors.length)];
-    let card ={"value" : Math.floor(Math.random() * 10) + 1, "color": randomColor};
+    let randomSign = signs[Math.floor(Math.random() * signs.length)];
+    color = randomSign === "♥" || randomSign === "♦" ? "red" : "black";
+    let card ={"value" : Math.floor(Math.random() * 10) + 1, "color": color, "sign": randomSign};
     let loop = true; //help to control the loop
     //Unique card for the deck
+    console.log("Generating card:", card); // Debugging log
     do {
       const exist = deck.some(
-        (genCard) => genCard.value === card.value && genCard.color === card.color
+        (genCard) => genCard.value === card.value && genCard.color === card.color && genCard.sign === card.sign
       );//.some checks if the card already exists in the deck and sends a boolean
       if (!exist) {
         deck.push(card);
@@ -45,8 +56,10 @@ const Card_generator = (deck, length) => {
       }
       else {
         console.log("Card already exists in deck, generating a new one.");
-        randomColor = colors[Math.floor(Math.random() * colors.length)];
-        card ={"value" : Math.floor(Math.random() * 10) + 1, "color": randomColor};
+        console.log("Current card:", card); // Debugging log
+        randomSign = signs[Math.floor(Math.random() * signs.length)];
+        color = randomSign === "♥" || randomSign === "♦" ? "red" : "black";
+        card ={"value" : Math.floor(Math.random() * 10) + 1, "color": color, "sign": randomSign};
       }
     } while (loop==true);
   }
