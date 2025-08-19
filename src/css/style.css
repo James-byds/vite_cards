@@ -3,7 +3,7 @@
 @tailwindcss components;
 @tailwindcss utilities;
 
-.card {
+.card, .drop {
   @apply flex flex-col items-center justify-center /*Flex elements*/
   w-24 h-32 bg-gray-200 /*Size and background*/
   border border-gray-300 rounded-lg shadow-md/*Borders*/
@@ -30,4 +30,12 @@
 
 .btn:hover {
   @apply bg-blue-600;
+}
+
+.drop {
+  @apply  border-2 border-dashed /*Border to separate from cards*/
+  border-gray-400 rounded-lg 
+  w-28 h-36 /*Bit larger than regular card*/
+  text-2xl font-semibold
+  my-5 p-6;/*Margin and padding for more spacing*/
 }
